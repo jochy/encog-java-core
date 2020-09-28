@@ -84,6 +84,9 @@ public class EngineConcurrency implements MultiThreadable {
 		// if( threads>1 )
 		// threads++;
 		this.executor = Executors.newFixedThreadPool(threads);
+
+		// Shutdown the executor with the JVM to avoid the JVM hanging
+		runtime.addShutdownHook(new Thread(() -> shutdown(30)));
 	}
 
 	/**
